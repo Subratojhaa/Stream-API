@@ -1,7 +1,6 @@
-# Stream-API
-
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,10 @@ public class Tester {
 		Set<Integer> intSet = new HashSet<>();
 		Set<String> stringSet = new HashSet<>();
 
+		BiConsumer<Object, Object> biPrint = (key, value) -> System.out.println(key + "->" + value);
+		Consumer print = System.out::println;
+		/*
+		
 		// 1. Filter Employees by Gender:
 		// - Retrieve a list of all female employees.
 
@@ -383,12 +386,20 @@ public class Tester {
 		// - Calculate the salary range (minimum and maximum) for each distinct age
 		// group.
 		
+		System.err.println("===44===");
 		list.stream().
-		collect(Collectors.groupingBy(Employee::getSalary,
+		collect(Collectors.groupingBy(Employee::getAge,
 				Collectors.collectingAndThen(Collectors.toList(),employees->{
-					double min=employees.stream().mapToDouble(Employees::getSalary).min().orElseThrow(()->new RuntimeException(""))
-				})))
+					double min=employees.stream().mapToDouble(Employee::getSalary).min().orElseThrow(()->new RuntimeException(""));
+					double max=employees.stream().mapToDouble(Employee::getSalary).max().orElseThrow(()->new RuntimeException(""));
+					
+					Map<String,Double> map=new HashMap<>();
+					map.put("min", min);
+					map.put("max",max);
+					return map;
+				}))).forEach((age,salary)->System.out.println("Age is:"+age+"Min Salary : "+salary.get("min")+"Max Salary : "+salary.get("max")));
 		
+		System.err.println("======");
 		
 		
 		
@@ -465,8 +476,6 @@ public class Tester {
 
 		// 52. Filter Employees by Age:
 		// - Get a list of employees older than 30 years.
-		BiConsumer<Object, Object> biPrint = (key, value) -> System.out.println(key + "->" + value);
-		Consumer print = System.out::println;
 
 		list.stream().collect(Collectors.groupingBy(Employee::getAge)).forEach(biPrint);
 		System.out.println("--");
@@ -543,14 +552,26 @@ public class Tester {
 		list.stream().filter(p -> p.getName().equals(p.getName().toUpperCase())).forEach(print);
 		System.out.println("---");
 
+  */
 		// 64. Calculate the Salary Range (Min-Max) for Each Age Group:
 		// - Calculate the salary range (minimum and maximum) for each distinct age
 		// group.
 		
 		
+		
+		list.stream().collect(Collectors.groupingBy(Employee::getAge,Collectors.collectingAndThen(Collectors.toList(), emp->{
+			double min=emp.stream().mapToDouble(Employee::getSalary).min().orElseThrow(()->new RuntimeException(""));
+			double max=emp.stream().mapToDouble(Employee::getSalary).max().orElseThrow(()->new RuntimeException(""));
+			
+			Map<String,Double> map=new HashMap<>();
+			map.put("min",min);
+			map.put("max",max);
+			return map;
+			
+		}))).forEach((age,sal)->System.out.println("age :"+age+" "+"min sal:"+sal.get("min")+" "+sal.get("max")));
 
-		//
-
+		
+		
 		// 65. Filter Employees by First Name Initial:
 		// - Retrieve employees whose first name starts with a specific initial (e.g.,
 		// 'E').
