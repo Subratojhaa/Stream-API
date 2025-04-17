@@ -759,3 +759,153 @@ public class Tester {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+//student interview question
+
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+
+public class StreamAPIInterviewQuestion {
+
+	public static void main(String[] args) {
+		
+		List<String> stringList=Arrays.asList("subrat","dipu","satya","deba");
+		List<Integer> list=Arrays.asList(1,2,3,4,5,6,5,4,15);
+		Consumer print=System.out::println;
+	//	1.Write a program to find the sum of all elements in a list using Java Stream API
+	
+		int sumOfEle=list.stream().mapToInt(Integer::intValue).sum();
+
+		System.out.println(sumOfEle);
+	
+	//	2. Given a list of integers, write a program to find and print the maximum element using Java Stream API
+		  Optional<Integer> maxNo=list.stream().max((a,b)->Double.compare(a,b));
+		System.out.println(maxNo.get());
+		
+			
+	//	3. Write a program to filter out all the even numbers from a list using Java Stream API
+		
+		list.stream().filter(k->k%2==0).forEach(System.out::println);
+		
+	
+	//	4. Given a list of strings, write a program to count the number of strings containing a specific character ‘a’ using Java Stream API.
+		long countSpec=stringList.stream().filter(a->a.contains("a")).count();
+		System.out.println(countSpec);
+		
+	
+	//	5. Write a program to convert a list of strings to uppercase using Java Stream API.
+		
+		stringList.stream().map(k->k.toUpperCase()).forEach(System.out::println);
+				
+		
+    //	6. Given a list of integers, write a program to calculate the average of all the numbers using Java Stream API.
+			
+		double avgOfList=list.stream().mapToInt(Integer::intValue).average().getAsDouble();
+		System.out.println(avgOfList);
+		
+		
+	
+	//	7. Write a program to sort a list of strings in alphabetical order using Java Stream API.
+		
+		stringList.stream().sorted().forEach(System.out::println);
+			
+	//	8. Given a list of strings, write a program to concatenate all the strings using Java Stream API.
+		
+		String concatString=stringList.stream().collect(Collectors.joining());
+		
+		System.out.println("Concat String is: "+concatString);
+		
+
+		
+	//	9. Write a program to find the longest string in a list of strings using Java Stream API.
+		
+		stringList.stream().max((a,b)->a.length()>b.length()?1:-1).ifPresent(System.out::println);
+			
+	//	10. Given a list of integers, write a program to find and print the second largest number using Java Stream API.
+		
+		list.stream().sorted((a,b)->b-a).limit(2).skip(1).forEach(System.out::println);
+
+		
+		
+	//	11. Write a program to remove all the duplicate elements from a list using Java Stream API.
+		
+		list.stream().distinct().forEach(System.out::println);
+			
+		
+	//	12. Given a list of strings, write a program to find and print the shortest string using Java Stream API.
+		
+		stringList.stream().sorted().limit(1).forEach(print);
+			
+		
+	//	13. Write a program to convert a list of integers to a list of their squares using Java Stream API.
+		
+		list.stream().map(a->a*a).forEach(print);
+	
+		
+	//	14. Given a list of strings, write a program to find and print the strings starting with a specific prefix ‘a’ using Java Stream API.
+		
+		stringList.stream().filter(a->a.startsWith("s")).forEach(print);
+			
+	//	15. Write a program to find the product of all elements in a list of integers using Java Stream API.
+			
+		int prodvalue=list.stream().reduce(1,(a,b)->a*b);
+		System.out.println("Product is: "+prodvalue);
+	
+		
+	//	16. Given a list of integers, write a program to find and print the prime numbers using Java Stream API.
+		
+		list.stream().filter(StreamAPIInterviewQuestion::isPrime).forEach(print);
+		
+			
+		
+	//	17. Write a program to check if a list of strings contains a specific string using Java Stream API.
+		
+		stringList.stream().filter(a->a.contains("satya")).forEach(print);
+		
+	//	18. Given a list of strings, write a program to find and print the strings with length greater than a specified value 5 using Java Stream API.
+		
+		stringList.stream().filter(a->a.length()>4).forEach(print);
+		
+	
+	//	19. Write a program to filter out all the elements divisible by 3 and 5 from a list of integers using Java Stream API.
+		
+		list.stream().filter(a->a%3==0 && a%5==0).forEach(print);
+		
+		
+	//	20. Given a list of strings, write a program to find and print the strings with the maximum length using Java Stream API.
+		
+		stringList.stream().sorted((a,b)->b.length()-a.length()).forEach(print);
+		
+		
+	}
+	
+	private static boolean isPrime(int n) {
+		if(n<=1) {
+			return false;
+		}
+		
+		for(int i=2;i<=Math.sqrt(n);i++) {
+			if(n%i==0)
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+}
+
