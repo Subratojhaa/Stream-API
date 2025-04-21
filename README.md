@@ -1007,6 +1007,147 @@ public class StreamAPIInterviewQuestion {
 	//49. Write a program to find the kth largest element in a list of integers using Java Stream API.
 	
 	//50. Given a list of integers, write a program to find and print the elements with the lowest frequency using Java Stream API.
+
+
+ Are you preparing for a Java developer interview? The Stream API is a frequent topic in technical interviews, known for its ability to process collections of data elegantly. In this article, I’ll walk you through 15 real interview questions that will help you master Java Streams.
+
+Problem 1: Write a Program to find the Maximum element in an array?
+int arr[] = {5,1,2,8};
+Arrays.stream(arr).max().getAsInt();
+Problem 2: Write a program to print the count of each character in a String?
+String str = "Now is the winter";
+Map<String, Long> charFreq = Arrays.stream(str.split(""))
+    .collect(Collectors.groupingBy(
+        Function.identity(), // or x -> x
+        Collectors.counting()
+    ));
+Problem 3: Merge two arrays of Person objects, sort them by age in ascending order, and then by name alphabetically for people with the same age.
+Person[] pList1 = {new Person("Alice", 25), new Person("Bob", 30),
+    new Person("Charlie", 25)};
+Person[] pList2 = {new Person("David", 30), new Person("Eve", 25),
+    new Person("Alice", 25)};
+
+Stream.concat(Arrays.stream(pList1), Arrays.stream(pList2))
+    .sorted(Comparator.comparingInt(Person::getAge)
+        .thenComparing(Person::getName))
+    .forEach(System.out::println);
+Problem 4: Find the length of the longest name in a list of strings.
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eva");
+int maxLength = names.stream()
+    .mapToInt(String::length)
+    .max()
+    .orElse(0);
+Problem 5: Check if a list of integers contains any prime numbers.
+List<Integer> numbers = Arrays.asList(4, 6, 8, 11, 12, 13, 14, 15);
+boolean hasPrime = numbers.stream()
+    .anyMatch(num -> isPrime(num));
+
+private static boolean isPrime(int num) {
+    if (num <= 1) return false;
+    return IntStream.rangeClosed(2, (int) Math.sqrt(num))
+        .noneMatch(i -> num % i == 0);
+}
+Problem 6: Count the total number of distinct words (case-insensitive) across multiple sentences.
+List<String> sentences = Arrays.asList(
+    "Java Stream API provides a fluent interface",
+    "It supports functional-style operations on streams",
+    "In this exercise, you need to count words"
+);
+
+long uniqueWords = sentences.stream()
+    .map(x -> x.toLowerCase().split(" "))
+    .flatMap(Arrays::stream)
+    .distinct()
+    .count();
+Problem 7: Find and concatenate the first two words that have even lengths.
+List<String> words = Arrays.asList("apple", "banana", "cherry", "date", "elderberry");
+String result = words.stream()
+    .filter(x -> x.length() % 2 == 0)
+    .limit(2)
+    .collect(Collectors.joining());
+Problem 8: Given a list of transactions, find the sum of transaction amounts for each day and sort by date.
+class Transaction {
+    String date;
+    long amount;
+    // constructors and getters
+}
+
+List<Transaction> transactions = Arrays.asList(
+    new Transaction("2022-01-01", 100),
+    new Transaction("2022-01-01", 200),
+    new Transaction("2022-01-02", 300)
+);
+
+Map<String, Long> dailyTotals = transactions.stream()
+    .collect(Collectors.groupingBy(
+        Transaction::getDate,
+        TreeMap::new,
+        Collectors.summingLong(Transaction::getAmount)
+    ));
+Problem 9: Merge two arrays of integers, sort them, and filter out any numbers greater than a specified threshold.
+int[] array1 = {1, 5, 3, 9, 7};
+int[] array2 = {2, 4, 6, 8, 10};
+int threshold = 7;
+
+IntStream.concat(Arrays.stream(array1), Arrays.stream(array2))
+    .boxed()
+    .sorted(Comparator.naturalOrder())
+    .filter(x -> x > threshold)
+    .forEach(System.out::println);
+Problem 10: Transform a list of employee records into a map of department to average salary.
+class Employee {
+    String department;
+    double salary;
+    // constructor and getters
+}
+
+Map<String, Double> deptAvgSalary = employees.stream()
+    .collect(Collectors.groupingBy(
+        Employee::getDepartment,
+        Collectors.averagingDouble(Employee::getSalary)
+    ));
+Problem 11: Partition a list of numbers into two groups: prime and non-prime numbers.
+List<Integer> numbers = Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10);
+Map<Boolean, List<Integer>> partitioned = numbers.stream()
+    .collect(Collectors.partitioningBy(num -> isPrime(num)));
+Problem 12: Generate Fibonacci sequence up to n terms using streams.
+Stream.iterate(new int[]{0, 1}, 
+    arr -> new int[]{arr[1], arr[0] + arr[1]})
+    .limit(10)
+    .map(arr -> arr[0])
+    .forEach(System.out::println);
+Problem 13: Group strings by their first character and count occurrences.
+List<String> words = Arrays.asList("apple", "banana", "bear", "cat", "apple");
+Map<Character, Long> frequency = words.stream()
+    .collect(Collectors.groupingBy(
+        str -> str.charAt(0),
+        Collectors.counting()
+    ));
+// Output: {a=2, b=2, c=1}
+Problem 14: Find the intersection of two lists using Java streams.
+List<Integer> list3 = Arrays.asList(1, 2, 3, 4, 5);
+List<Integer> list4 = Arrays.asList(3, 4, 5, 6, 7);
+
+List<Integer> intersection =
+    list3.stream().filter(list4::contains).toList();
+System.out.println(intersection);
+Problem 15: How to Convert a List of Objects into a Sorted Map While Handling Duplicate Keys in Java?
+ List<Employee> employees = Arrays.asList(
+            new Employee(101, "Alice"),
+            new Employee(102, "Bob"),
+            new Employee(101, "Charlie"),
+            new Employee(103, "David"),
+            new Employee(102, "Eve")
+        );
+
+        // Convert to TreeMap with List as value type
+        Map<Integer, List<Employee>> employeeMap = employees.stream()
+            .collect(Collectors.groupingBy(
+                e -> e.id,               // Key extractor
+                TreeMap::new,            // Use TreeMap to maintain sorted order
+                Collectors.toList()      // Collect values into a list
+            ));
+Explanation:
 	
 	
 	
