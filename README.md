@@ -907,5 +907,114 @@ public class StreamAPIInterviewQuestion {
 		return true;
 	}
 
+ //	//21. Write a program to reverse a list of strings using Java Stream API.
+//	
+//	
+//		
+//       Collections.reverse(stringList);
+//       System.out.println(stringList);
+//	List<String> reversedList=IntStream.range(0,stringList.size())
+//			.mapToObj(i->stringList.get(stringList.size()-1-i))
+//			.collect(Collectors.toList());
+	
+	
+	
+//	//22. Given a list of integers, write a program to find and print the distinct odd numbers using Java Stream API.
+//
+//		list.stream().filter(a->a%2!=0).distinct().forEach(print);
+//		
+//	//23. Write a program to remove all null values from a list of strings using Java Stream API.
+//	
+//		stringList.stream().filter(a->a!=null).forEach(print);
+//		
+//	//24. Given a list of integers, write a program to find and print the sum of all odd numbers using Java Stream API.
+//	
+//		int sumOfOdd=list.stream().filter(a->a%2!=0).mapToInt(Integer::intValue).sum();
+//		System.out.println(sumOfOdd);
+	//25. Write a program to find the intersection of two lists of strings using Java Stream API.
+	
+		List<String> f=Arrays.asList("a","c","e","g");
+		List<String> s=Arrays.asList("b","a","f","e");
+//		//approach 1
+//		f.stream().filter(a->s.contains(a)).forEach(print);
+//		//approach 2
+//		f.stream().filter(s::contains).forEach(System.out::println);
+//		
+	//26. Given a list of strings, write a program to find and print the strings containing only vowels using Java Stream API.
+	
+//		//approach 1
+//		f.stream().filter(a->a.equals("a")|| a.equals("e")|| a.equals("i")|| a.equals("o")|| a.equals("u") ).forEach(print);
+//		
+//		System.out.println("----");
+//		//approach2
+//		s.stream().filter(a->a.matches("[aeiouAEIOU]+")).forEach(print);
+	//27. Write a program to convert a list of strings to a comma-separated string using Java Stream API.
+	
+//		String joinString=f.stream().collect(Collectors.joining(","));
+//		System.out.println(joinString);
+//	//28. Given a list of integers, write a program to find and print the index of the first occurrence of a specific number using Java Stream API.
+//	
+//		int index=8;
+//		list.stream().filter(a->a.equals(list.get(8))).forEach(print);
+//	//29. Write a program to find the union of two lists of integers using Java Stream API.
+//	       List<Integer> al=Arrays.asList(1,2,3,4,5,6);
+//	       List<Integer> bl=Arrays.asList(5,6,7,8,9);
+//	      
+//	       Stream.concat(al.stream(),bl.stream()).distinct().forEach(print);
+	       
+//	//30. Given a list of strings, write a program to find and print the strings containing duplicate characters using Java Stream API.
+//	
+//		stringList.stream().filter(a->a.length()!=a.chars().distinct().count()).forEach(print);
+		
+	//31. Write a program to check if all elements in a list of strings are of the same length using Java Stream API.
+	
+		boolean sameLength=stringList.stream().map(a->a.length()).distinct().count()==1;
+		System.out.println("All element are same in list  :"+sameLength);
+	//32. Given a list of integers, write a program to find and print the difference between the maximum and minimum numbers using Java Stream API.
+	
+	//33. Write a program to remove all whitespace from a list of strings using Java Stream API.
+	
+	//34. Given a list of strings, write a program to find and print the strings containing a specific substring using Java Stream API.
+	
+	//35. Write a program to find the mode of a list of integers using Java Stream API.
+	
+	//36. Given a list of strings, write a program to find and print the strings with the minimum length using Java Stream API.
+	
+	//37. Write a program to find the frequency of each element in a list of integers using Java Stream API.
+	
+	//38. Given a list of strings, write a program to find and print the strings with the maximum number of vowels using Java Stream API.
+	
+	//39. Write a program to check if a list of integers is sorted in ascending order using Java Stream API.
+	
+	//40. Given a list of strings, write a program to find and print the strings with the minimum number of vowels using Java Stream API.
+	
+	//41. Write a program to find the median of a list of integers using Java Stream API.
+	
+	//42. Given a list of strings, write a program to find and print the strings containing a specific character at least twice using Java Stream API.
+	
+	//43. Write a program to find the kth smallest element in a list of integers using Java Stream API.
+	
+	//44. Given a list of strings, write a program to find and print the strings with the maximum number of consonants using Java Stream API.
+	
+	//45. Write a program to check if a list of strings is palindrome using Java Stream API.
+	
+	//46. Given a list of integers, write a program to find and print the elements with the highest frequency using Java Stream API.
+	
+	//47. Write a program to remove all non-numeric characters from a list of strings using Java Stream API.
+	
+	//48. Given a list of strings, write a program to find and print the strings containing only digits using Java Stream API.
+	
+	//49. Write a program to find the kth largest element in a list of integers using Java Stream API.
+	
+	//50. Given a list of integers, write a program to find and print the elements with the lowest frequency using Java Stream API.
+	
+	
+	
+	
+
+}
+}
+
+
 }
 
